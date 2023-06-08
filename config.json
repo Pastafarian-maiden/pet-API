@@ -3,5 +3,7 @@
     "PASSWORD_BASIC": "2021alem",
     "HOST_API": "0.0.0.0",
     "PORT_API": ":8080",
-    "ADDR_API": "0.0.0.0:8080"
+    "ADDR_API": "0.0.0.0:8080",
+    "USERNAME_DB": "pastafarian",
+    "PASSWORD_DB": "2021alem"
 }

@@ -4,13 +4,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Config struct {
-	Username string `mapstructure:USERNAME_BASIC`
-	Password string `mapstructure:PASSWORD_BASIC`
-	Address  string `mapstructure:ADDR_API`
-}
-
-func LoadConfig() (config Config, err error) {
+func LoadConfig() (err error) {
 	viper.AddConfigPath("./")
 	viper.SetConfigName("config")
 	viper.SetConfigType("json")
@@ -22,7 +16,6 @@ func LoadConfig() (config Config, err error) {
 		return
 	}
 
-	err = viper.Unmarshal(&config)
 	return
 
 	// content, err := ioutil.ReadFile("./config.json")
