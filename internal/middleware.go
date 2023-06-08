@@ -2,10 +2,10 @@ package internal
 
 import (
 	"encoding/base64"
-	"os"
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 // Middleware is for Basic Authentication
@@ -18,6 +18,9 @@ func authMiddleware() gin.HandlerFunc {
 			respondWithError(401, "Unauthorized", c)
 			// c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Invalid Authorization header format"})
 			return
+		}
+		if authenticateUser(auth) {
+			c.JSON(200, gin.H{"message": "OK"})
 		}
 
 		//Прохождение middleware, если аутентификация прошла успешно
@@ -40,8 +43,8 @@ func authenticateUser(auth []string) bool {
 	}
 
 	// Проверка логина и пароля
-	username := os.Getenv("USERNAME_BASIC")
-	password := os.Getenv("PASSWORD_BASIC")
+	username := viper.GetString("USERNAME_BASIC")
+	password := viper.GetString("PASSWORD_BASIC")
 
 	if credentials[0] != username || credentials[1] != password {
 		return false
